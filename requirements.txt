@@ -1,0 +1,4 @@
+ics >= 0.*
+requests >= 2.*
+click >= 8.*
+python-dotenv >= 0.*

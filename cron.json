@@ -1,0 +1,10 @@
+{
+  "jobs": [
+    {
+      "command": "0 8 * * 1 python main.py --days-ahead=6"
+    },
+    {
+      "command": "0 8 * * 2,3,4,5 python main.py"
+    }
+  ]
+}

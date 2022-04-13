@@ -46,7 +46,7 @@ def build_html_today(events):
     today_events = [e for e in events if event_happens_on_date(e, arrow.now().date())]
     if len(today_events) == 0:
         return "*Aucun évènement prévu aujourd'hui, quartier libre !*"
-    notif = f"### [{len(events)} évènements aujourd'hui]({os.environ['CALENDAR_WEB_URL']}) \n\n"
+    notif = f"**{len(today_events)} évènements aujourd'hui** \n\n"
     notif += "".join([html_event(e) for e in today_events])
     return notif
 
