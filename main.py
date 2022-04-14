@@ -14,7 +14,8 @@ def event_happens_on_date(event, date):
     return event.begin.date() <= date and event.end.date() >= date
 
 
-def fetch_events(url, days_ahead):
+def fetch_events():
+    url = os.environ['CALENDAR_ICS_URL']
     return sorted(Calendar(requests.get(url).text).events)
 
 def send_notification(html):
@@ -60,7 +61,7 @@ def validate_env_vars():
 @click.option("--days-ahead", default=0, help="Include events occuring X days ahead")
 def run(days_ahead):
     """Send a summary of upcoming events to Mattermost"""
-    events = fetch_events(os.environ['CALENDAR_ICS_URL'], days_ahead)
+    events = fetch_events()
     notif = build_html_multiple_days(events, days_ahead) if days_ahead > 0 else build_html_today(events)
     notif += f"\n[Voir le calendrier complet ↗️]({os.environ['CALENDAR_WEB_URL']})"
     send_notification(notif)
