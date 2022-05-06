@@ -11,7 +11,11 @@ locale.setlocale(locale.LC_TIME, "fr_FR")
 REQUIRED_ENV_VARIABLES = ["CALENDAR_ICS_URL", "CALENDAR_WEB_URL", "MATTERMOST_HOOK_URL", "MATTERMOST_CHANNEL"]
 
 def event_happens_on_date(event, date):
-    return event.begin.date() <= date and event.end.date() >= date
+    if event.begin.date() == event.end.date():
+        return event.begin.date() == date
+    else:
+        # events spanning multiple days
+        return event.begin.date() <= date and event.end.date() > date
 
 
 def fetch_events():
